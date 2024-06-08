@@ -1,25 +1,40 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using Elongear.Pages;
+using Elongear.Services;
+using Elongear.ViewModels;
+using Microsoft.Extensions.Logging;
+using Microsoft.Maui.Hosting;
 
-namespace Elongear
+namespace Elongear;
+
+public static class MauiProgram
 {
-    public static class MauiProgram
+    
+    public static MauiApp CreateMauiApp()
     {
-        public static MauiApp CreateMauiApp()
-        {
-            var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+        var builder = MauiApp.CreateBuilder();
+        builder
+            .UseMauiApp<App>()
+            .RegisterPages()
+            .RegisterViewModels()
+            .RegisterServices()
+            .UseMauiCommunityToolkit(options =>
+            {
+                options.SetShouldEnableSnackbarOnWindows(true);
+            })
+            .UseMauiCommunityToolkitMediaElement()
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+		builder.Logging.AddDebug();
 #endif
-
-            return builder.Build();
-        }
+        
+        var app = builder.Build();
+        ServiceHelper.Provider = app.Services;
+        return app;
     }
 }

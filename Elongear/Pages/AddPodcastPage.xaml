@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Elongear.ViewModels"
+             xmlns:obs="clr-namespace:Elongear.Observables"
+                xmlns:pages="clr-namespace:Elongear.Pages"
+             x:Class="Elongear.Pages.AddPodcastPage"
+             Title="Додати подкаст">
+    <VerticalStackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <VerticalStackLayout Grid.Column="0">
+                <Label Text="Натисність праворуч і оберіть зображення подкасту"/>
+                <Label x:Name="ImageLabel" 
+                       VerticalTextAlignment="End"
+                       Text="{Binding ImagePath, Mode=TwoWay}" 
+                       FontSize="8"/>
+            </VerticalStackLayout>
+            <ImageButton x:Name="PodcastImage" 
+                         Aspect="Fill"
+                         Grid.Column="1"
+                         BackgroundColor="DarkCyan" 
+                         Clicked="PodcastImage_Clicked"
+                         WidthRequest="200"
+                         HeightRequest="200"/>
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="8*"/>
+
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Entry
+            Placeholder="Введіть назву"
+            Text="{Binding PodcastName}" 
+            Grid.Row="0" Grid.Column="0"/>
+
+        <VerticalStackLayout Grid.Row="0" Grid.Column="1" x:DataType="vm:AddPodcastViewModel">
+            <Entry x:Name="CategoryInput"
+                Placeholder="Назва категорії"
+                Text="{Binding CategoryName, Mode=TwoWay}"
+                />
+            <ListView x:Name="SuggestList"
+                      ItemsSource="{Binding FilteredCategories}"
+                      ItemSelected="SuggestList_ItemSelected"
+                      IsVisible="{Binding Source={x:Reference CategoryInput}, Path=IsFocused}"
+                      >
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="obs:Category">
+                        <Label Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+        
+  
+        <Editor 
+            Placeholder="Опис подкасту"
+            Text="{Binding PodcastDescription}" Grid.Row="1" Grid.Column="1"/>
+        
+        <Button x:Name="ChoiceFileButton" 
+                Grid.Row="2" Grid.Column="0"
+                Text="Обрати файл подкасту" 
+                Clicked="ChoiceFileButton_Clicked"/>
+        <Label x:Name="FileName" 
+               Grid.Row="2" Grid.Column="1"
+               Text="{Binding PodcastPath, Mode=TwoWay}"/>
+        <Button Text="Надіслати" Command="{Binding AddPodcastCommand}"/>
+    </VerticalStackLayout>
+</ContentPage>

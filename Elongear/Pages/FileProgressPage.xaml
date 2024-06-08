@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Elongear.Pages.FileProgressPage"
+             xmlns:vm="clr-namespace:Elongear.ViewModels"
+             xmlns:model="clr-namespace:Elongear.Observables"
+             xmlns:con="clr-namespace:Elongear.Converters"
+             Title="Прогрес завантаження">
+    <ContentPage.Resources>
+        <con:FileTransferStateToStringConverter x:Key="FileStateConverter"/>
+    </ContentPage.Resources>
+    <CollectionView x:DataType="vm:FileProgressViewModel"
+                    ItemsSource="{Binding Files}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="model:FileTransferRecord">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="6*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label 
+                        Grid.Column="0"
+                        Text="{Binding PodcastName}"/>
+                    <Label 
+                        Grid.Column="1"
+                        Text="{Binding IsUploading, Converter={StaticResource FileStateConverter}}"/>
+                    <ProgressBar 
+                        Grid.Column="2"
+                        Progress="{Binding CurrentProgress}"/>
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

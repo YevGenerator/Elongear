@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Elongear.ViewModels"
+             xmlns:model="clr-namespace:Elongear.Observables"
+             xmlns:toolkit ="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:pages="clr-namespace:Elongear.Pages"
+             xmlns:con ="clr-namespace:Elongear.Converters"
+             x:Class="Elongear.Pages.PlayingPage"
+             Title="Відтворення">
+    <ContentPage.Resources>
+        <con:IdToListenConverter x:Key="IdListenConverter"/>
+        <con:IdToImagePathConverter x:Key="IdImageConverter"/>
+    </ContentPage.Resources>
+    <VerticalStackLayout>
+        <Image x:Name="PodcastImage"
+               Source="{Binding Podcast.PodcastId, Converter={StaticResource IdImageConverter}}"
+               WidthRequest="200"
+               HeightRequest="{Binding Source={x:Reference PodcastImage}, Path=WidthRequest}"/>
+        <toolkit:MediaElement
+            HeightRequest="100">
+            <toolkit:MediaElement.Source>
+                <toolkit:UriMediaSource Uri="{Binding Podcast.PodcastId, Converter={StaticResource IdListenConverter}}"/>
+            </toolkit:MediaElement.Source>
+        </toolkit:MediaElement>
+        <ScrollView>
+            <VerticalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+                <Button Text="Лайк" Command="{Binding}"/>
+                <Button Text="Дізлайк" Command="{Binding}"/>
+                <Button Text="Завантажити" Command="{Binding DownloadPodcastCommand}"/>
+                <Button Text="Скарга" Command="{Binding DownloadPodcastCommand}"/>
+                </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="{Binding Podcast.Name}"/>
+                 <Label Text="User Name"/>
+            </HorizontalStackLayout>
+             <Label Text="{Binding Podcast.Description}"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </VerticalStackLayout>
+</ContentPage>

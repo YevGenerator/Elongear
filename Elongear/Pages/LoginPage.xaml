@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Elongear.ViewModels"
+                xmlns:pages="clr-namespace:Elongear.Pages"
+             x:Class="Elongear.Pages.LoginPage"
+             x:DataType="vm:LoginViewModel"
+             Title="Авторизація">
+    <VerticalStackLayout>
+        <Entry Placeholder="Email or Login" HorizontalTextAlignment="Center" Text="{Binding LoginOrEmail}"/>
+        <Entry Placeholder="Password" HorizontalTextAlignment="Center" IsPassword="True" Text="{Binding Password}"/>
+        <Button Text="Login" Command="{Binding SignInCommand}"/>
+        <Button Text="Sign up" Command="{Binding MoveToSignUpPageCommand}"/>
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Elongear.Pages.Views.ConfirmationDigits">
+    <Grid x:Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"
+                                  NumberOfTapsRequired="1"/>
+        </Grid.GestureRecognizers>
+        <Entry x:Name="Digit1" Grid.Column="0" TextChanged="OnTextChanged"/>
+        <Entry x:Name="Digit2" Grid.Column="1" TextChanged="OnTextChanged"/>
+        <Entry x:Name="Digit3" Grid.Column="2" TextChanged="OnTextChanged"/>
+        <Entry x:Name="Digit4" Grid.Column="3" TextChanged="OnTextChanged"/>
+        <Entry x:Name="Digit5" Grid.Column="4" TextChanged="OnTextChanged"/>
+    </Grid>
+</ContentView>

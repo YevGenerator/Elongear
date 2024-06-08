@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:view="clr-namespace:Elongear.Pages.Views"
+             xmlns:vm ="clr-namespace:Elongear.ViewModels"
+             xmlns:pages="clr-namespace:Elongear.Pages"
+             x:Class="Elongear.Pages.Views.ConfirmationPage"
+             x:DataType="vm:ConfirmationViewModel"
+             Title="Підтвердження реєстрації">
+    <VerticalStackLayout>
+        <Label 
+            Text="Вам на пошту має надійти лист, що містить посилання та код для активації. 
+            Перейдіть за посиланням або введіть цифри. Код діє 3 хвилини"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"/>
+        <Label x:Name="timer" Text="{Binding Time}"/>
+        <view:ConfirmationDigits Digits="{Binding Digits, Mode=TwoWay}"/>
+        <Button Text="Активувати себе" Command="{Binding SendCodeCommand}"/>
+        <Button Text="Отримати код ще раз" Command="{Binding ReceiveCodeCommand}"/>
+    </VerticalStackLayout>
+</ContentPage>

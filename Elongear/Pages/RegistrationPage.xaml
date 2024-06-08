@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:views="clr-namespace:Elongear.Pages"
+             xmlns:vm="clr-namespace:Elongear.ViewModels"
+             x:Class="Elongear.Pages.RegistrationPage"
+             x:DataType="vm:RegistrationViewModel"
+             Title="Реєстрація">
+    
+    <VerticalStackLayout>
+        <Entry Placeholder="Email" HorizontalTextAlignment="Center" Text="{Binding Email}"/>
+        <Entry Placeholder="Login" HorizontalTextAlignment="Center" Text="{Binding Login}"/>
+        <Entry Placeholder="Enter password" HorizontalTextAlignment="Center" IsPassword="True" Text="{Binding Password}"/>
+        <Entry Placeholder="Repeat password" HorizontalTextAlignment="Center" IsPassword="True" Text="{Binding PasswordRepeated}"/>
+        <Button x:Name="SignUpButton" Text="Sign up" Command="{Binding SignUpCommand}"/>
+        <Button x:Name="LoginButton" Text="Login" Command="{Binding MoveToLoginPageCommand}"/>
+        <Button x:Name="ConfirmButton" Text="Confirmation" Command="{Binding MoveToConfirmationPageCommand}"/>
+        <Button Text="Select" Command="{Binding MoveToSearchPageCommand}"/>
+    </VerticalStackLayout>
+</ContentPage>
